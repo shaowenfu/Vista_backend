@@ -1,0 +1,43 @@
+# FastAPI框架及其依赖
+fastapi==0.109.2
+uvicorn==0.27.1
+python-multipart==0.0.9
+pydantic==2.6.1
+pydantic-settings==2.1.0
+
+# 视觉处理相关
+ultralytics==8.1.8  # YOLOv8
+opencv-python==4.9.0.80
+numpy==1.26.3
+Pillow==10.2.0
+
+# AI模型相关
+openai==1.12.0  # GPT-4V API
+edge-tts==6.1.9  # Edge TTS
+openai-whisper==20231117  # Whisper
+
+# 音频处理相关
+soundfile==0.12.1
+librosa==0.10.1
+scipy==1.12.0
+
+# 工具和辅助库
+python-jose==3.3.0  # JWT认证
+passlib==1.7.4     # 密码哈希
+bcrypt==4.1.2      # 密码加密
+aiofiles==23.2.1   # 异步文件操作
+httpx==0.26.0      # 异步HTTP客户端
+tenacity==8.2.3    # 重试机制
+python-dotenv==1.0.1  # 环境变量管理
+
+# 监控和日志
+prometheus-client==0.19.0
+python-json-logger==2.0.7
+
+# 开发工具
+black==24.1.1      # 代码格式化
+isort==5.13.2      # import排序
+flake8==7.0.0      # 代码检查
+pytest==8.0.0      # 单元测试
+pytest-asyncio==0.23.5  # 异步测试
+pytest-cov==4.1.0  # 测试覆盖率
