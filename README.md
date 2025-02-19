@@ -1,189 +1,200 @@
-# VISTA Backend
+<div align="center">
 
-VISTA (Visual Intelligence Support & Technical Assistant) 是一个基于多模态大模型的场景理解和交互辅助服务后端系统。
+# 🌟 VISTA Backend | VISTA 后端系统
 
-## 功能特点
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.9+-blue.svg" alt="Python Version">
+  <img src="https://img.shields.io/badge/FastAPI-0.68+-green.svg" alt="FastAPI Version">
+  <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
+  <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome">
+</p>
 
-- **场景理解与描述**：使用GPT-4V进行场景分析和描述
-- **文字识别与朗读**：集成OCR和Edge TTS实现文本识别和语音合成
-- **物品识别**：基于YOLOv8的实时物体检测
-- **多模态交互**：支持语音和触觉反馈的自然交互
+[English](./README.md) | [简体中文](./README_zh.md)
 
-## 系统架构
+VISTA (Visual Intelligence Support & Technical Assistant) is an intelligent scene understanding and interaction assistance backend system based on multimodal large models.
 
-```plaintext
-VISTA Backend
-├── 感知模块 (Perception)
-│   ├── 视觉识别 (YOLOv8)
-│   ├── 多模态感知
-│   └── 数据预处理
-├── 推理模块 (Inference)
-│   ├── 场景理解 (GPT-4V)
-│   └── 决策制定
-├── 交互模块 (Interaction)
-│   ├── 语音交互 (Whisper + Edge TTS)
-│   └── 触觉反馈
-└── 执行模块 (Execution)
-    ├── 任务规划
-    └── 执行监控
+VISTA (视觉智能支持与技术助手) 是一个基于多模态大模型的场景理解和交互辅助服务后端系统。
+
+</div>
+
+---
+
+## ✨ Features | 功能特点
+
+<table>
+  <tr>
+    <td>🔍 Scene Understanding</td>
+    <td>Powered by GPT-4V for comprehensive scene analysis</td>
+  </tr>
+  <tr>
+    <td>📝 Text Recognition & TTS</td>
+    <td>Integrated OCR and Edge TTS for text recognition and speech synthesis</td>
+  </tr>
+  <tr>
+    <td>🎯 Object Detection</td>
+    <td>Real-time object detection using YOLOv8</td>
+  </tr>
+  <tr>
+    <td>🤝 Multimodal Interaction</td>
+    <td>Natural interaction with voice and haptic feedback</td>
+  </tr>
+</table>
+
+## 🏗️ Architecture | 系统架构
+
+```mermaid
+graph TD
+    A[VISTA Backend] --> B[Perception Module]
+    A --> C[Inference Module]
+    A --> D[Interaction Module]
+    A --> E[Execution Module]
+    
+    B --> B1[Vision Recognition]
+    B --> B2[Multimodal Sensing]
+    B --> B3[Data Preprocessing]
+    
+    C --> C1[Scene Understanding]
+    C --> C2[Decision Making]
+    
+    D --> D1[Voice Interaction]
+    D --> D2[Haptic Feedback]
+    
+    E --> E1[Task Planning]
+    E --> E2[Execution Monitoring]
 ```
 
-## 技术栈
+## 🛠️ Tech Stack | 技术栈
 
-- **Web框架**: FastAPI
-- **AI模型**: 
-  - GPT-4V (场景理解)
-  - YOLOv8 (物体检测)
-  - Whisper (语音识别)
-  - Edge TTS (语音合成)
-- **异步处理**: asyncio
-- **状态管理**: 有限状态机
-- **监控**: Prometheus
+<div align="center">
 
-## 快速开始
+| Category | Technologies |
+|----------|-------------|
+| **Framework** | ![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi) |
+| **AI Models** | ![OpenAI](https://img.shields.io/badge/GPT--4V-412991?style=for-the-badge&logo=openai) ![YOLOv8](https://img.shields.io/badge/YOLOv8-00FFFF?style=for-the-badge) |
+| **Speech** | ![Whisper](https://img.shields.io/badge/Whisper-FF6F61?style=for-the-badge) ![Edge TTS](https://img.shields.io/badge/Edge_TTS-0078D7?style=for-the-badge) |
+| **Monitoring** | ![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?style=for-the-badge&logo=prometheus) |
 
-### 环境要求
+</div>
 
-- Python 3.9+
-- pip
+## 🚀 Quick Start | 快速开始
 
-### 安装
+### Prerequisites | 环境要求
 
-1. 克隆仓库
 ```bash
+# Clone the repository
 git clone https://github.com/your-username/vista-backend.git
 cd vista-backend
-```
 
-2. 创建虚拟环境
-```bash
+# Create and activate virtual environment
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
+# or
 venv\Scripts\activate     # Windows
-```
 
-3. 安装依赖
-```bash
+# Install dependencies
 pip install -r requirements.txt
-```
 
-4. 配置环境变量
-```bash
+# Configure environment
 cp .env.example .env
-# 编辑.env文件，填入必要的配置信息
-```
 
-### 运行
-
-```bash
+# Start the server
 uvicorn app.main:app --reload
 ```
 
-访问 http://localhost:8000/docs 查看API文档
+## 📚 API Documentation | API文档
 
-## API接口
+<details>
+<summary>Click to expand | 点击展开</summary>
 
-### 感知模块
+### Perception Module | 感知模块
+- `POST /api/perception/vision/detect`
+- `GET /api/perception/sensing/collect`
+- `POST /api/perception/preprocessing/enhance`
 
-- `POST /api/perception/vision/detect`: 物体检测
-- `GET /api/perception/sensing/collect`: 传感器数据采集
-- `POST /api/perception/preprocessing/enhance`: 数据增强处理
+### Inference Module | 推理模块
+- `POST /api/inference/scene/understand`
+- `POST /api/inference/decision/make`
 
-### 推理模块
+### Interaction Module | 交互模块
+- `POST /api/interaction/speech/recognize`
+- `POST /api/interaction/speech/synthesize`
+- `POST /api/interaction/haptic/generate`
 
-- `POST /api/inference/scene/understand`: 场景理解
-- `POST /api/inference/decision/make`: 决策制定
+### Execution Module | 执行模块
+- `POST /api/execution/task/plan`
+- `GET /api/execution/task/{task_id}/status`
+- `GET /api/execution/metrics`
 
-### 交互模块
+</details>
 
-- `POST /api/interaction/speech/recognize`: 语音识别
-- `POST /api/interaction/speech/synthesize`: 语音合成
-- `POST /api/interaction/haptic/generate`: 触觉反馈生成
+## 📁 Project Structure | 项目结构
 
-### 执行模块
+<details>
+<summary>Click to expand | 点击展开</summary>
 
-- `POST /api/execution/task/plan`: 任务规划
-- `GET /api/execution/task/{task_id}/status`: 任务状态查询
-- `GET /api/execution/metrics`: 执行指标查询
-
-## 项目结构
-
-```plaintext
+```
 vista_backend/
-├── app/                    # 主应用目录
-│   ├── main.py            # 主应用入口
-│   ├── routers/           # 路由模块
-│   └── models/            # 数据模型
-├── perception/            # 感知模块
-├── inference/            # 推理模块
-├── interaction/          # 交互模块
-├── execution/           # 执行模块
-├── docs/                # 文档
-├── tests/              # 测试用例
-├── requirements.txt    # 项目依赖
-└── README.md          # 项目说明
+├── 📁 app/
+│   ├── 📄 main.py
+│   ├── 📁 routers/
+│   └── 📁 models/
+├── 📁 perception/
+├── 📁 inference/
+├── 📁 interaction/
+├── 📁 execution/
+├── 📁 docs/
+├── 📁 tests/
+├── 📄 requirements.txt
+└── 📄 README.md
 ```
 
-## 开发指南
+</details>
 
-### 代码规范
-
-- 使用Black进行代码格式化
-- 使用isort进行import排序
-- 使用flake8进行代码检查
-- 遵循PEP 8命名规范
-
-### 测试
+## 🔧 Development | 开发指南
 
 ```bash
-# 运行单元测试
+# Code formatting
+black .
+isort .
+
+# Run tests
 pytest
-
-# 生成测试覆盖率报告
 pytest --cov=app tests/
-```
 
-### 文档生成
-
-API文档自动生成于：
-- Swagger UI: http://localhost:8000/docs
-- ReDoc: http://localhost:8000/redoc
-
-## 部署
-
-### Docker部署
-
-1. 构建镜像
-```bash
+# Build Docker image
 docker build -t vista-backend .
-```
-
-2. 运行容器
-```bash
 docker run -d -p 8000:8000 vista-backend
 ```
 
-### 生产环境配置
+## 🤝 Contributing | 贡献指南
 
-- 使用gunicorn作为WSGI服务器
-- 配置反向代理（如Nginx）
-- 启用HTTPS
-- 设置适当的CORS策略
+1. Fork the Project | 复刻项目
+2. Create your Feature Branch | 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes | 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch | 推送到分支 (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request | 创建Pull Request
 
-## 贡献指南
+## 📄 License | 许可证
 
-1. Fork 项目
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 创建Pull Request
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 许可证
+本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
 
-[MIT License](LICENSE)
+## 📬 Contact | 联系方式
 
-## 联系方式
+<p align="center">
+  <a href="mailto:shaowenfu.pg@gmail.com">
+    <img src="https://img.shields.io/badge/Email-shaowenfu.pg%40gmail.com-blue?style=for-the-badge&logo=gmail" alt="Email">
+  </a>
+  <a href="https://github.com/shaowenfu">
+    <img src="https://img.shields.io/badge/GitHub-Sherwen-black?style=for-the-badge&logo=github" alt="GitHub">
+  </a>
+</p>
 
-- 项目维护者: Your Name
-- Email: your.email@example.com
-- GitHub: [your-username](https://github.com/your-username)
+---
+
+<div align="center">
+
+**Star this repository if you find it helpful! | 如果觉得有帮助，请给个星标！**
+
+</div>
