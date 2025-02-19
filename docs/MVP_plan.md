@@ -107,6 +107,220 @@ AI 服务 (GPT-4V等)
 - Bug修复
 - 准备演示
 
+## 五、项目目录结构
+
+设计一个完整的 FastAPI 项目目录结构，并添加必要的文件和配置。这个项目结构将包括主应用程序、开发文档、数据模型以及模块化的路由。
+完整的 FastAPI 项目目录结构
+以下是完整的项目目录结构，包括主应用、模块化的路由、数据模型和开发文档：
+```plaintext
+vista_backend/
+├── app/                       # 主应用目录
+│   ├── main.py                # 主应用入口
+│   ├── routers/               # 路由模块
+│   │   ├── __init__.py
+│   │   ├── perception.py      # 感知模块路由
+│   │   ├── inference.py       # 推理模块路由
+│   │   ├── interaction.py     # 交互模块路由
+│   │   └── execution.py       # 执行模块路由
+│   ├── models/                # 数据模型
+│   │   ├── __init__.py
+│   │   ├── vision.py          # 视觉相关模型
+│   │   ├── inference.py       # 推理相关模型
+│   │   ├── interaction.py     # 交互相关模型
+│   │   └── execution.py       # 执行相关模型
+├── perception/                # 感知模块
+│   ├── vision_recognition.py  # YOLOv8封装
+│   ├── multimodal_sensing.py  # 传感器数据采集
+│   └── data_preprocessing.py  # 图像增强/噪声过滤
+├── inference/                 # 推理模块
+│   ├── scene_understanding.py # GPT-4V集成
+│   └── decision_making.py     # 规则引擎
+├── interaction/               # 交互模块
+│   ├── voice_interaction.py   # Whisper + Edge TTS
+│   └── haptic_feedback.py     # 振动模式映射
+├── execution/                 # 执行模块
+│   ├── task_planner.py        # 有限状态机
+│   └── execution_monitor.py   # 异常检测
+├── docs/                      # 开发文档
+│   ├── architecture.md        # 系统架构文档
+│   ├── api.md                 # API 文档
+│   └── README.md              # 项目说明文档
+├── requirements.txt           # 依赖文件
+└── README.md                  # 项目根目录说明文档
+```
+1. 主应用文件 (app/main.py)
+这是 FastAPI 的入口文件，负责注册所有模块的路由。
+```python
+from fastapi import FastAPI
+from routers.perception import router as perception_router
+from routers.inference import router as inference_router
+from routers.interaction import router as interaction_router
+from routers.execution import router as execution_router
+
+app = FastAPI(title="VISTA API", description="API for VISTA - Visual Intelligence Support & Technical Assistant")
+
+# 注册路由模块
+app.include_router(perception_router, prefix="/api/perception", tags=["Perception"])
+app.include_router(inference_router, prefix="/api/inference", tags=["Inference"])
+app.include_router(interaction_router, prefix="/api/interaction", tags=["Interaction"])
+app.include_router(execution_router, prefix="/api/execution", tags=["Execution"])
+```
+2. 路由模块
+每个模块的路由文件负责定义该模块的 API 接口。
+- app/routers/perception.py
+```python
+from fastapi import APIRouter
+from perception.vision_recognition import recognize_objects
+from perception.multimodal_sensing import collect_sensor_data
+from perception.data_preprocessing import preprocess_data
+
+router = APIRouter()
+
+@router.get("/vision/")
+def vision_recognition():
+    return recognize_objects()
+
+@router.get("/sensing/")
+def multimodal_sensing():
+    return collect_sensor_data()
+
+@router.get("/preprocessing/")
+def data_preprocessing():
+    return preprocess_data()
+```
+- app/routers/inference.py
+```python
+from fastapi import APIRouter
+from inference.scene_understanding import understand_scene
+from inference.decision_making import make_decision
+
+router = APIRouter()
+
+@router.get("/scene/")
+def scene_understanding():
+    return understand_scene()
+
+@router.get("/decision/")
+def decision_making():
+    return make_decision()
+```
+- app/routers/interaction.py
+```python
+from fastapi import APIRouter
+from interaction.voice_interaction import voice_to_text, text_to_speech
+from interaction.haptic_feedback import generate_haptic_pattern
+
+router = APIRouter()
+
+@router.get("/voice/")
+def voice_interaction():
+    return voice_to_text()
+
+@router.get("/speech/")
+def text_to_speech_interaction():
+    return text_to_speech()
+
+@router.get("/haptic/")
+def haptic_feedback():
+    return generate_haptic_pattern()
+```
+- app/routers/execution.py
+```python
+from fastapi import APIRouter
+from execution.task_planner import plan_task
+from execution.execution_monitor import monitor_execution
+
+router = APIRouter()
+
+@router.get("/plan/")
+def task_planning():
+    return plan_task()
+
+@router.get("/monitor/")
+def execution_monitoring():
+    return monitor_execution()
+```
+
+3. 数据模型
+在 app/models 文件夹中，你可以定义与每个模块相关的数据模型。
+- 例如：
+- app/models/vision.py
+```python
+from pydantic import BaseModel
+
+class VisionRecognitionResult(BaseModel):
+    objects: list[str]
+    confidence: float
+```
+- app/models/inference.py
+```python
+from pydantic import BaseModel  
+```
+- app/models/interaction.py
+```python
+from pydantic import BaseModel
+```
+- app/models/execution.py
+```python
+from pydantic import BaseModel
+```
+
+4. 开发文档
+
+### VISTA 系统架构
+
+#### 模块划分
+1. **感知模块 (Perception)**：
+   - 视觉识别
+   - 多模态感知
+   - 数据预处理
+2. **推理模块 (Inference)**：
+   - 场景理解
+   - 决策制定
+3. **交互模块 (Interaction)**：
+   - 语音交互
+   - 触觉反馈
+4. **执行模块 (Execution)**：
+   - 任务规划
+   - 执行监控
+docs/api.md
+markdown复制
+# VISTA API 文档
+
+## 感知模块
+- `GET /api/perception/vision/`：视觉识别
+- `GET /api/perception/sensing/`：多模态感知
+- `GET /api/perception/preprocessing/`：数据预处理
+
+## 推理模块
+- `GET /api/inference/scene/`：场景理解
+- `GET /api/inference/decision/`：决策制定
+
+## 交互模块
+- `GET /api/interaction/voice/`：语音识别
+- `GET /api/interaction/speech/`：语音合成
+- `GET /api/interaction/haptic/`：触觉反馈
+
+## 执行模块
+- `GET /api/execution/plan/`：任务规划
+- `GET /api/execution/monitor/`：执行监控
+5. 运行项目
+在项目根目录下运行以下命令启动 FastAPI 应用：
+```bash
+uvicorn app.main:app --reload
+```
+6. 访问 API 和文档
+- API 访问：
+  - http://127.0.0.1:8000/api/perception/vision/
+  - http://127.0.0.1:8000/api/inference/scene/
+  - http://127.0.0.1:8000/api/interaction/voice/
+  - http://127.0.0.1:8000/api/execution/plan/
+- 自动生成的文档：
+  - Swagger UI：http://127.0.0.1:8000/docs
+  - ReDoc：http://127.0.0.1:8000/redoc
+### 总结
+  通过这种模块化的结构，vista项目后端代码更加清晰、易于维护和扩展。每个模块的功能被封装在单独的文件中，通过主应用动态注册路由，使得整个项目的结构更加合理。
+
 ## 五、关键指标
 
 ### 1. 性能指标

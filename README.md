@@ -1,121 +1,189 @@
-# VISTA - Visual Intelligence Support & Technical Assistant for BLV
-# VISTA - 视觉智能辅助系统（面向视障群体）
+# VISTA Backend
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+VISTA (Visual Intelligence Support & Technical Assistant) 是一个基于多模态大模型的场景理解和交互辅助服务后端系统。
 
-[English](#english) | [中文](#中文)
+## 功能特点
 
-<h2 id="english">English</h2>
+- **场景理解与描述**：使用GPT-4V进行场景分析和描述
+- **文字识别与朗读**：集成OCR和Edge TTS实现文本识别和语音合成
+- **物品识别**：基于YOLOv8的实时物体检测
+- **多模态交互**：支持语音和触觉反馈的自然交互
 
-## Overview
-VISTA is an open-source assistive technology project specifically designed for Blind and Low Vision (BLV) people, helping them better perceive and interact with their environment through multimodal AI technologies.
+## 系统架构
 
-### Related Repositories
-- [Vista-frontend](https://github.com/yourusername/Vista-frontend) - Flutter mobile application
-- [Vista-backend](https://github.com/yourusername/Vista-backend) - FastAPI backend server
-
-### Key Features
-- Scene understanding and description
-- Text recognition and reading
-- Object detection and identification
-- Voice-based interaction
-
-### Tech Stack
-- Frontend: Flutter
-- Backend: FastAPI
-- AI Services: GPT-4V, YOLO, Whisper, Edge TTS
-
-### Project Structure
-```
-Vista-frontend/                # Flutter mobile application
-├── docs/                    # Documentation
-│   ├── architecture.md      # Frontend architecture
-│   └── mvp_plan.md         # MVP development plan
-├── lib/                     # Flutter source code
-│   ├── api/                # API client
-│   ├── models/             # Data models
-│   ├── screens/            # UI screens
-│   ├── services/           # Business logic
-│   └── widgets/            # Reusable widgets
-└── README.md               # Project documentation
-
-Vista-backend/                # FastAPI backend server
-├── docs/                   # Documentation
-│   └── api.md             # API documentation
-├── app/                    # Application code
-│   ├── api/               # API endpoints
-│   ├── core/              # Core functionality
-│   ├── models/            # Data models
-│   └── services/          # Business services
-├── tests/                 # Test cases
-└── README.md              # Project documentation
+```plaintext
+VISTA Backend
+├── 感知模块 (Perception)
+│   ├── 视觉识别 (YOLOv8)
+│   ├── 多模态感知
+│   └── 数据预处理
+├── 推理模块 (Inference)
+│   ├── 场景理解 (GPT-4V)
+│   └── 决策制定
+├── 交互模块 (Interaction)
+│   ├── 语音交互 (Whisper + Edge TTS)
+│   └── 触觉反馈
+└── 执行模块 (Execution)
+    ├── 任务规划
+    └── 执行监控
 ```
 
-### Quick Links
-- [Frontend Documentation](https://github.com/yourusername/Vista-frontend)
-- [Backend Documentation](https://github.com/yourusername/Vista-backend)
-- [API Documentation](https://github.com/yourusername/Vista-backend/docs/api.md)
+## 技术栈
 
-### Contributing
-We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting PRs.
+- **Web框架**: FastAPI
+- **AI模型**: 
+  - GPT-4V (场景理解)
+  - YOLOv8 (物体检测)
+  - Whisper (语音识别)
+  - Edge TTS (语音合成)
+- **异步处理**: asyncio
+- **状态管理**: 有限状态机
+- **监控**: Prometheus
 
-### License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 快速开始
 
-<h2 id="中文">中文</h2>
+### 环境要求
 
-## 项目概述
-VISTA是一个专门面向视障群体(BLV)的开源辅助技术项目，通过多模态AI技术帮助视障人士更好地感知和理解周围环境。
+- Python 3.9+
+- pip
 
-### 相关仓库
-- [Vista-frontend](https://github.com/yourusername/Vista-frontend) - Flutter移动应用
-- [Vista-backend](https://github.com/yourusername/Vista-backend) - FastAPI后端服务
+### 安装
 
-### 核心功能
-- 场景理解与描述
-- 文字识别与朗读
-- 物体检测与识别
-- 语音交互界面
-
-### 技术栈
-- 前端：Flutter
-- 后端：FastAPI
-- AI服务：GPT-4V、YOLO、Whisper、Edge TTS
-
-### 项目结构
-```
-Vista-frontend/                # Flutter移动应用
-├── docs/                    # 文档
-│   ├── architecture.md      # 前端架构
-│   └── mvp_plan.md         # MVP开发计划
-├── lib/                     # Flutter源代码
-│   ├── api/                # API客户端
-│   ├── models/             # 数据模型
-│   ├── screens/            # 界面
-│   ├── services/           # 业务逻辑
-│   └── widgets/            # 可复用组件
-└── README.md               # 项目文档
-
-Vista-backend/                # FastAPI后端服务
-├── docs/                   # 文档
-│   └── api.md             # API文档
-├── app/                    # 应用代码
-│   ├── api/               # API端点
-│   ├── core/              # 核心功能
-│   ├── models/            # 数据模型
-│   └── services/          # 业务服务
-├── tests/                 # 测试用例
-└── README.md              # 项目文档
+1. 克隆仓库
+```bash
+git clone https://github.com/your-username/vista-backend.git
+cd vista-backend
 ```
 
-### 快速链接
-- [前端文档](https://github.com/yourusername/Vista-frontend)
-- [后端文档](https://github.com/yourusername/Vista-backend)
-- [API文档](https://github.com/yourusername/Vista-backend/docs/api.md)
+2. 创建虚拟环境
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+```
 
-### 贡献指南
-我们欢迎各种形式的贡献！提交PR前请阅读[贡献指南](CONTRIBUTING.md)。
+3. 安装依赖
+```bash
+pip install -r requirements.txt
+```
 
-### 开源协议
-本项目采用MIT协议 - 详见[LICENSE](LICENSE)文件。
+4. 配置环境变量
+```bash
+cp .env.example .env
+# 编辑.env文件，填入必要的配置信息
+```
+
+### 运行
+
+```bash
+uvicorn app.main:app --reload
+```
+
+访问 http://localhost:8000/docs 查看API文档
+
+## API接口
+
+### 感知模块
+
+- `POST /api/perception/vision/detect`: 物体检测
+- `GET /api/perception/sensing/collect`: 传感器数据采集
+- `POST /api/perception/preprocessing/enhance`: 数据增强处理
+
+### 推理模块
+
+- `POST /api/inference/scene/understand`: 场景理解
+- `POST /api/inference/decision/make`: 决策制定
+
+### 交互模块
+
+- `POST /api/interaction/speech/recognize`: 语音识别
+- `POST /api/interaction/speech/synthesize`: 语音合成
+- `POST /api/interaction/haptic/generate`: 触觉反馈生成
+
+### 执行模块
+
+- `POST /api/execution/task/plan`: 任务规划
+- `GET /api/execution/task/{task_id}/status`: 任务状态查询
+- `GET /api/execution/metrics`: 执行指标查询
+
+## 项目结构
+
+```plaintext
+vista_backend/
+├── app/                    # 主应用目录
+│   ├── main.py            # 主应用入口
+│   ├── routers/           # 路由模块
+│   └── models/            # 数据模型
+├── perception/            # 感知模块
+├── inference/            # 推理模块
+├── interaction/          # 交互模块
+├── execution/           # 执行模块
+├── docs/                # 文档
+├── tests/              # 测试用例
+├── requirements.txt    # 项目依赖
+└── README.md          # 项目说明
+```
+
+## 开发指南
+
+### 代码规范
+
+- 使用Black进行代码格式化
+- 使用isort进行import排序
+- 使用flake8进行代码检查
+- 遵循PEP 8命名规范
+
+### 测试
+
+```bash
+# 运行单元测试
+pytest
+
+# 生成测试覆盖率报告
+pytest --cov=app tests/
+```
+
+### 文档生成
+
+API文档自动生成于：
+- Swagger UI: http://localhost:8000/docs
+- ReDoc: http://localhost:8000/redoc
+
+## 部署
+
+### Docker部署
+
+1. 构建镜像
+```bash
+docker build -t vista-backend .
+```
+
+2. 运行容器
+```bash
+docker run -d -p 8000:8000 vista-backend
+```
+
+### 生产环境配置
+
+- 使用gunicorn作为WSGI服务器
+- 配置反向代理（如Nginx）
+- 启用HTTPS
+- 设置适当的CORS策略
+
+## 贡献指南
+
+1. Fork 项目
+2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
+3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
+4. 推送到分支 (`git push origin feature/AmazingFeature`)
+5. 创建Pull Request
+
+## 许可证
+
+[MIT License](LICENSE)
+
+## 联系方式
+
+- 项目维护者: Your Name
+- Email: your.email@example.com
+- GitHub: [your-username](https://github.com/your-username)
