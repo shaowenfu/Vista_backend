@@ -11,7 +11,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 # 导入各个模块的路由
-from app.routers import perception, inference, interaction, execution
+from app.routers import perception, inference, interaction, execution, api
 
 # 创建FastAPI应用实例
 app = FastAPI(
@@ -55,6 +55,14 @@ app.include_router(
     execution,
     prefix="/api/execution",
     tags=["执行模块"],
+    responses={404: {"description": "Not found"}},
+)
+
+# 注册Flutter前端API路由
+app.include_router(
+    api.router,
+    prefix="/api",
+    tags=["前端API"],
     responses={404: {"description": "Not found"}},
 )
 
